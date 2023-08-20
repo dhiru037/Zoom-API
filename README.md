@@ -1,6 +1,7 @@
 # Zoom Meetings Dashboard
 
 Preview of a Simple Admin Dashboard for the Delivery Manager to view the Zoom Meeting Schedules of different Sections:
+
 <img width="387" alt="Screenshot 2023-08-20 at 6 44 50 PM" src="https://github.com/dhiru037/Zoom/assets/93209461/a0ce57df-e032-4439-8948-820b5ce20ebb">
 ---------------------------------------------------------------------------------------------------------------------------------------
 
