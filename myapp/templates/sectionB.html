@@ -1,0 +1,107 @@
+{% load custom_filters_b %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Section B</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .buttons-container {
+      flex-basis: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .calendar-container {
+      flex-grow: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .calendar-box {
+      flex-basis: calc(33.33% - 20px);
+      padding: 15px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .meeting-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .meeting-details {
+      font-size: 14px;
+      color: #555;
+    }
+    .meeting-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script>
+    function toggleMeetingDetails() {
+      var calendarBoxes = document.querySelectorAll('.calendar-box');
+      for (var i = 0; i < calendarBoxes.length; i++) {
+        if (calendarBoxes[i].classList.contains('hidden')) {
+          calendarBoxes[i].classList.remove('hidden');
+        } else {
+          calendarBoxes[i].classList.add('hidden');
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+    <h1>Section B</h1>
+  <div class="container">
+    <div class="buttons-container">
+      <button id="scheduleButton" onclick="toggleMeetingDetails()">Schedule</button>
+      <button id="pastDetailsButton">Past Meeting Details</button>
+      <button id="attendanceButton">Attendance</button>
+      <form action="{% url 'home' %}">
+        <button type="submit">Back to Sections</button>
+      </form>
+    </div>
+    
+    <div class="calendar-container">
+      {% for meeting in meetings %}
+        {% if meeting.title|endswith_section_b %}
+          <div class="calendar-box hidden">
+            <div class="meeting-box">
+              <h2 class="meeting-title">{{ meeting.title }}</h2>
+              <p class="meeting-details">
+                Timings: {{ meeting.start_time }}
+                <br>
+                Taken by {{ meeting.professor }}
+                <br>
+                Link: <a class="meeting-link" href="{{ meeting.link }}">{{ meeting.link }}</a>
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
